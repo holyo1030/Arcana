@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mystic-950: #0a0612;
+  --color-mystic-900: #130e1f;
+  --color-mystic-800: #1e1633;
+  --color-mystic-700: #2d2249;
+  --color-mystic-600: #3d2e63;
+  --color-mystic-500: #5a3f8a;
+  --color-gold-500: #c9a84c;
+  --color-gold-400: #d4b962;
+  --color-gold-300: #e0cb83;
+  --color-gold-200: #ecdda8;
+  --color-card: #1a1425;
+  --color-card-hover: #241d33;
+
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-mono: "SF Mono", "Consolas", monospace;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-mystic-950);
+  color: var(--color-gold-200);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+::selection {
+  background-color: var(--color-mystic-500);
+  color: var(--color-gold-300);
+}
+
+/* Card flip animation support */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}

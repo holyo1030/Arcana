@@ -1,0 +1,108 @@
+import { useState } from 'react';
+import { type DrawnCard } from '../lib/TarotEngine';
+import { type Spread } from '../data/spreads';
+import CardDetail from './CardDetail';
+
+interface SpreadLayoutProps {
+  spread: Spread;
+  drawnCards: DrawnCard[];
+  onRequestReading: () => void;
+  isAnalyzing: boolean;
+}
+
+export default function SpreadLayout({ spread, drawnCards, onRequestReading, isAnalyzing }: SpreadLayoutProps) {
+  const [selectedCard, setSelectedCard] = useState<DrawnCard | null>(null);
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 space-y-8">
+      <div className="text-center space-y-2">
+        <h2 className="text-xl font-serif text-gold-300">{spread.name}</h2>
+        <p className="text-xs text-gold-500/50">点击任意一张牌查看详细牌义</p>
+      </div>
+
+      {/* Card grid */}
+      <div className={`grid gap-4 justify-center ${
+        spread.cardCount === 1 ? 'grid-cols-1 max-w-[180px] mx-auto' :
+        spread.cardCount === 3 ? 'grid-cols-3 max-w-md mx-auto' :
+        'grid-cols-5 max-w-2xl mx-auto'
+      }`}>
+        {drawnCards.map((drawn, i) => (
+          <div
+            key={i}
+            onClick={() => setSelectedCard(drawn)}
+            className={`cursor-pointer transition-all hover:scale-105 ${
+              spread.id === 'celtic-cross' ? getCelticLayoutClass(i) : ''
+            }`}
+          >
+            <div className="text-center mb-1">
+              <span className="text-[10px] text-gold-500/40 uppercase tracking-widest">
+                {drawn.position.name}
+              </span>
+            </div>
+            <div className={`aspect-[2/3] border border-gold-500/30 bg-card overflow-hidden hover:border-gold-500/60 transition-colors ${
+              selectedCard === drawn ? 'ring-2 ring-gold-500' : ''
+            }`}>
+              <div className={`w-full h-full flex flex-col items-center justify-center p-2 ${drawn.isReversed ? 'rotate-180' : ''}`}>
+                <img
+                  src={`/cards/${drawn.card.image}`}
+                  alt={drawn.card.name}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.querySelector('.fallback')?.classList.remove('hidden');
+                  }}
+                />
+                <div className="fallback hidden text-center">
+                  <div className="text-gold-400 text-sm font-serif">{drawn.card.name}</div>
+                  <div className="text-gold-500/40 text-[10px]">{drawn.card.nameEn}</div>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mt-1.5">
+              <div className="text-xs font-serif text-gold-300">{drawn.card.name}</div>
+              <div className={`text-[10px] ${drawn.isReversed ? 'text-red-400/60' : 'text-gold-500/40'}`}>
+                {drawn.isReversed ? '逆位' : '正位'}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Card detail modal */}
+      {selectedCard && (
+        <CardDetail
+          drawn={selectedCard}
+          onClose={() => setSelectedCard(null)}
+        />
+      )}
+
+      {/* AI Reading button */}
+      <div className="flex justify-center pt-4">
+        <button
+          onClick={onRequestReading}
+          disabled={isAnalyzing}
+          className="px-10 py-3 border-2 border-gold-500 text-gold-400 font-serif text-sm uppercase tracking-widest hover:bg-gold-500 hover:text-mystic-950 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isAnalyzing ? '解读生成中...' : 'AI 深度解读'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function getCelticLayoutClass(index: number): string {
+  const classes: Record<number, string> = {
+    0: 'col-start-3 row-start-2',
+    1: 'col-start-3 row-start-2',
+    2: 'col-start-3 row-start-3',
+    3: 'col-start-2 row-start-2',
+    4: 'col-start-3 row-start-1',
+    5: 'col-start-4 row-start-2',
+    6: 'col-start-5 row-start-4',
+    7: 'col-start-5 row-start-3',
+    8: 'col-start-5 row-start-2',
+    9: 'col-start-5 row-start-1',
+  };
+  return classes[index] || '';
+}
