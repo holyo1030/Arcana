@@ -1,6 +1,6 @@
 import { supabase } from './AuthService';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://arcana-api-6x0i.onrender.com';
+const API_BASE_URL = 'https://arcana-api-6x0i.onrender.com';
 
 async function fetchWithAuth(url: string, options: RequestInit = {}) {
   const { data: { session } } = await supabase.auth.getSession();
