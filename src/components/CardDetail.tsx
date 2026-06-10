@@ -62,7 +62,7 @@ export default function CardDetail({ drawn, onClose }: CardDetailProps) {
           {/* Current orientation meaning */}
           <div className="space-y-3">
             <h4 className="text-xs font-serif text-gold-400 uppercase tracking-[0.2em]">
-              &#10022; {drawn.isReversed ? '逆位含义' : '正位含义'}
+              ✦ {drawn.isReversed ? '逆位含义' : '正位含义'}
             </h4>
             <div className="flex flex-wrap gap-2">
               {info.keywords.map((kw, i) => (
@@ -97,7 +97,7 @@ export default function CardDetail({ drawn, onClose }: CardDetailProps) {
 
           {/* Element */}
           <div className="text-[10px] text-gold-500/25 border-t border-gold-500/10 pt-3">
-            &#10022; {drawn.card.element} &middot; {drawn.card.arcana === 'major' ? '大阿卡纳' : '小阿卡纳'}
+            ✦ {drawn.card.element} &middot; {drawn.card.arcana === 'major' ? '大阿卡纳' : '小阿卡纳'}
             {drawn.card.suit && ` · ${
               { wands: '权杖', cups: '圣杯', swords: '宝剑', pentacles: '星币' }[drawn.card.suit]
             }`}

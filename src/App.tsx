@@ -138,7 +138,7 @@ function App() {
         {/* Header */}
         <header className="w-full text-center mb-16 mt-8">
           <div className="ornament mb-6 max-w-xs mx-auto">
-            <span>&#10022;</span>
+            <span>✦</span>
           </div>
           <h1 className="text-5xl sm:text-6xl font-serif font-bold tracking-[0.15em] text-gold-300 text-glow-strong mb-3">
             ARCANA
@@ -147,7 +147,7 @@ function App() {
             Unveil Your Path
           </p>
           <div className="ornament mt-6 max-w-xs mx-auto">
-            <span>&#10022;</span>
+            <span>✦</span>
           </div>
         </header>
 
@@ -158,7 +158,7 @@ function App() {
               onClick={handleNewReading}
               className="text-xs font-serif text-gold-500/40 hover:text-gold-300 transition-colors flex items-center gap-2"
             >
-              <span>&#10094;</span> 新的占卜
+              <span>‹</span> 新的占卜
             </button>
           </div>
         )}
@@ -209,7 +209,7 @@ function App() {
         {/* Footer */}
         <footer className="mt-20 mb-8 text-center">
           <div className="ornament mb-4 max-w-[100px] mx-auto">
-            <span className="text-[8px]">&#10022;</span>
+            <span className="text-[8px]">✦</span>
           </div>
           <p className="text-[10px] font-mono text-gold-500/20">&copy; {new Date().getFullYear()} ARCANA</p>
         </footer>

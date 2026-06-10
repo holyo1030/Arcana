@@ -82,7 +82,7 @@ export default function SpreadLayout({ spread, drawnCards, onRequestReading, isA
       {/* AI Reading button */}
       <div className="flex flex-col items-center gap-3 pt-6">
         <div className="ornament max-w-[200px]">
-          <span className="text-[8px]">&#10022;</span>
+          <span className="text-[8px]">✦</span>
         </div>
         <button
           onClick={onRequestReading}

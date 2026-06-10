@@ -51,7 +51,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
         <div className="p-8 space-y-6">
           <div className="text-center">
             <div className="ornament mb-4 max-w-[60px] mx-auto">
-              <span className="text-[8px]">&#10022;</span>
+              <span className="text-[8px]">✦</span>
             </div>
             <h2 className="text-2xl font-serif text-gold-300 tracking-wider text-glow">ARCANA</h2>
             <p className="text-[10px] font-mono text-gold-500/30 uppercase tracking-[0.4em] mt-1">登录以获取 AI 解读</p>

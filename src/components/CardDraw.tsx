@@ -25,7 +25,7 @@ export default function CardDraw({ spread, drawnCards, onComplete }: CardDrawPro
         <h2 className="text-2xl font-serif text-gold-300 text-glow">{spread.name}</h2>
         <p className="text-xs text-gold-500/50">
           {allRevealed
-            ? '&#10022; 所有牌已揭示 &#10022;'
+            ? '✦ 所有牌已揭示 ✦'
             : `点击翻开第 ${revealedCount + 1} 张牌（共 ${spread.cardCount} 张）`}
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function CardDraw({ spread, drawnCards, onComplete }: CardDrawPro
                   >
                     <div className="w-3/4 h-3/4 border border-gold-500/15 rounded-sm flex items-center justify-center">
                       <div className="text-center">
-                        <span className="text-gold-500/30 text-3xl block">&#10022;</span>
+                        <span className="text-gold-500/30 text-3xl block">✦</span>
                         {isNext && (
                           <span className="text-gold-500/20 text-[8px] mt-2 block uppercase tracking-widest">
                             揭示
@@ -110,7 +110,7 @@ export default function CardDraw({ spread, drawnCards, onComplete }: CardDrawPro
                   >
                     <div className="text-xs font-serif text-gold-300">{drawn.card.name}</div>
                     <div className={`text-[10px] mt-0.5 ${drawn.isReversed ? 'text-red-400/70' : 'text-gold-500/40'}`}>
-                      {drawn.isReversed ? '&#9660; 逆位' : '&#9650; 正位'}
+                      {drawn.isReversed ? '▼ 逆位' : '▲ 正位'}
                     </div>
                   </motion.div>
                 )}

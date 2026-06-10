@@ -21,7 +21,7 @@ export default function QuestionForm({ onSubmit }: QuestionFormProps) {
     <form onSubmit={handleSubmit} className="space-y-12 max-w-xl mx-auto px-4">
       <div className="space-y-4">
         <label className="block text-xs uppercase tracking-[0.3em] text-gold-500/50 text-center">
-          &#10022; 你的困惑 &#10022;
+          ✦ 你的困惑 ✦
         </label>
         <div className="relative">
           <textarea
@@ -36,7 +36,7 @@ export default function QuestionForm({ onSubmit }: QuestionFormProps) {
 
       <div className="space-y-4">
         <label className="block text-xs uppercase tracking-[0.3em] text-gold-500/50 text-center">
-          &#10022; 选择牌阵 &#10022;
+          ✦ 选择牌阵 ✦
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {SPREADS.map((spread) => (

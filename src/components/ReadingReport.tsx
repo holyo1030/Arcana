@@ -12,7 +12,7 @@ export default function ReadingReport({ content, onBack, onNewReading }: Reading
     <div className="max-w-2xl mx-auto px-4 space-y-10">
       <div className="text-center space-y-3">
         <div className="ornament max-w-[120px] mx-auto">
-          <span className="text-[8px]">&#10022;</span>
+          <span className="text-[8px]">✦</span>
         </div>
         <h2 className="text-2xl font-serif text-gold-300 text-glow">解读报告</h2>
       </div>
@@ -34,7 +34,7 @@ export default function ReadingReport({ content, onBack, onNewReading }: Reading
               blockquote: ({ children }) => <blockquote className="border-l-2 border-gold-500/30 bg-gold-500/5 pl-5 py-3 my-4 italic text-gold-200/50 rounded-r-sm">{children}</blockquote>,
               hr: () => (
                 <div className="ornament my-8 max-w-[80px] mx-auto">
-                  <span className="text-[6px]">&#10022;</span>
+                  <span className="text-[6px]">✦</span>
                 </div>
               ),
             }}
@@ -49,7 +49,7 @@ export default function ReadingReport({ content, onBack, onNewReading }: Reading
           onClick={onBack}
           className="px-6 py-2.5 border border-gold-500/20 text-gold-500/50 font-serif text-sm hover:border-gold-500/40 hover:text-gold-400 transition-all rounded-sm"
         >
-          &#10094; 返回牌面
+          ‹ 返回牌面
         </button>
         <button
           onClick={onNewReading}
