@@ -53,18 +53,21 @@ export function AuthModal({ onClose }: AuthModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-mystic-950/80 backdrop-blur-sm p-4" onClick={onClose}>
-      <div className="relative w-full max-w-sm bg-mystic-900 border border-gold-500/20" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-gold-500/40 hover:text-gold-400 text-xl">&times;</button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-mystic-950/90 backdrop-blur-md p-4" onClick={onClose}>
+      <div className="relative w-full max-w-sm bg-mystic-900 border border-gold-500/20 rounded-sm glow-purple" onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-gold-500/30 hover:text-gold-400 text-xl transition-colors">&times;</button>
 
         <div className="p-8 space-y-6">
           <div className="text-center">
-            <h2 className="text-2xl font-serif text-gold-300 tracking-tight">ARCANA</h2>
+            <div className="ornament mb-4 max-w-[60px] mx-auto">
+              <span className="text-[8px]">&#10022;</span>
+            </div>
+            <h2 className="text-2xl font-serif text-gold-300 tracking-wider text-glow">ARCANA</h2>
             <p className="text-[10px] font-mono text-gold-500/30 uppercase tracking-[0.4em] mt-1">Unveil Your Path</p>
           </div>
 
           {error && (
-            <div className="p-2 border border-red-400/20 text-red-400/70 text-xs text-center">{error}</div>
+            <div className="p-2.5 border border-red-400/20 bg-red-400/5 text-red-400/70 text-xs text-center rounded-sm">{error}</div>
           )}
 
           {/* Email OTP */}
@@ -75,19 +78,19 @@ export function AuthModal({ onClose }: AuthModalProps) {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="邮箱登录/注册"
-                className="flex-1 text-xs font-mono bg-mystic-800 border border-gold-500/20 px-3 py-2 text-gold-200 focus:border-gold-500 focus:outline-none"
+                className="flex-1 text-xs font-mono bg-mystic-800/50 border border-gold-500/15 px-3 py-2.5 text-gold-200 focus:border-gold-500/50 focus:outline-none transition-all rounded-sm"
                 disabled={isLoading}
               />
               <button
                 onClick={handleEmailLogin}
                 disabled={isLoading}
-                className="px-3 py-2 text-xs font-mono border border-gold-500/30 text-gold-500/70 hover:border-gold-500 hover:text-gold-400 transition-colors disabled:opacity-50"
+                className="px-3 py-2.5 text-xs font-mono border border-gold-500/25 text-gold-500/70 hover:border-gold-500/60 hover:text-gold-400 transition-colors disabled:opacity-50 rounded-sm"
               >
                 {isLoading ? '...' : '发送验证'}
               </button>
             </div>
             {emailSent && (
-              <p className="text-[10px] text-gold-500/50 font-mono">验证邮件已发送，请点击邮箱里的链接完成登录。</p>
+              <p className="text-[10px] text-gold-500/50 font-mono">&#10022; 验证邮件已发送，请点击邮箱里的链接完成登录。</p>
             )}
           </div>
 
@@ -95,13 +98,13 @@ export function AuthModal({ onClose }: AuthModalProps) {
           <div className="space-y-2">
             <button
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gold-500/20 text-gold-500/70 text-sm font-serif hover:border-gold-500/40 hover:text-gold-400 transition-all"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gold-500/15 text-gold-500/60 text-sm font-serif hover:border-gold-500/40 hover:text-gold-400 hover:bg-mystic-800/30 transition-all rounded-sm"
             >
               Google 登录
             </button>
             <button
               onClick={handleGithubLogin}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gold-500/20 text-gold-500/70 text-sm font-serif hover:border-gold-500/40 hover:text-gold-400 transition-all"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gold-500/15 text-gold-500/60 text-sm font-serif hover:border-gold-500/40 hover:text-gold-400 hover:bg-mystic-800/30 transition-all rounded-sm"
             >
               GitHub 登录
             </button>

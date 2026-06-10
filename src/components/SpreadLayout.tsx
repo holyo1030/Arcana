@@ -14,14 +14,14 @@ export default function SpreadLayout({ spread, drawnCards, onRequestReading, isA
   const [selectedCard, setSelectedCard] = useState<DrawnCard | null>(null);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 space-y-8">
-      <div className="text-center space-y-2">
-        <h2 className="text-xl font-serif text-gold-300">{spread.name}</h2>
-        <p className="text-xs text-gold-500/50">点击任意一张牌查看详细牌义</p>
+    <div className="max-w-4xl mx-auto px-4 space-y-10">
+      <div className="text-center space-y-3">
+        <h2 className="text-2xl font-serif text-gold-300 text-glow">{spread.name}</h2>
+        <p className="text-xs text-gold-500/40">点击任意一张牌查看详细牌义</p>
       </div>
 
       {/* Card grid */}
-      <div className={`grid gap-4 justify-center ${
+      <div className={`grid gap-5 justify-center ${
         spread.cardCount === 1 ? 'grid-cols-1 max-w-[180px] mx-auto' :
         spread.cardCount === 3 ? 'grid-cols-3 max-w-md mx-auto' :
         'grid-cols-5 max-w-2xl mx-auto'
@@ -30,17 +30,19 @@ export default function SpreadLayout({ spread, drawnCards, onRequestReading, isA
           <div
             key={i}
             onClick={() => setSelectedCard(drawn)}
-            className={`cursor-pointer transition-all hover:scale-105 ${
+            className={`cursor-pointer group transition-all hover:scale-105 ${
               spread.id === 'celtic-cross' ? getCelticLayoutClass(i) : ''
             }`}
           >
-            <div className="text-center mb-1">
-              <span className="text-[10px] text-gold-500/40 uppercase tracking-widest">
+            <div className="text-center mb-1.5">
+              <span className="text-[10px] text-gold-500/35 uppercase tracking-widest">
                 {drawn.position.name}
               </span>
             </div>
-            <div className={`aspect-[2/3] border border-gold-500/30 bg-card overflow-hidden hover:border-gold-500/60 transition-colors ${
-              selectedCard === drawn ? 'ring-2 ring-gold-500' : ''
+            <div className={`aspect-[2/3] border bg-card overflow-hidden rounded-sm transition-all ${
+              selectedCard === drawn
+                ? 'border-gold-500 glow-gold-strong'
+                : 'border-gold-500/20 group-hover:border-gold-500/50 group-hover:glow-gold'
             }`}>
               <div className={`w-full h-full flex flex-col items-center justify-center p-2 ${drawn.isReversed ? 'rotate-180' : ''}`}>
                 <img
@@ -59,10 +61,10 @@ export default function SpreadLayout({ spread, drawnCards, onRequestReading, isA
                 </div>
               </div>
             </div>
-            <div className="text-center mt-1.5">
+            <div className="text-center mt-2">
               <div className="text-xs font-serif text-gold-300">{drawn.card.name}</div>
-              <div className={`text-[10px] ${drawn.isReversed ? 'text-red-400/60' : 'text-gold-500/40'}`}>
-                {drawn.isReversed ? '逆位' : '正位'}
+              <div className={`text-[10px] mt-0.5 ${drawn.isReversed ? 'text-red-400/70' : 'text-gold-500/35'}`}>
+                {drawn.isReversed ? '▼ 逆位' : '▲ 正位'}
               </div>
             </div>
           </div>
@@ -78,13 +80,16 @@ export default function SpreadLayout({ spread, drawnCards, onRequestReading, isA
       )}
 
       {/* AI Reading button */}
-      <div className="flex justify-center pt-4">
+      <div className="flex flex-col items-center gap-3 pt-6">
+        <div className="ornament max-w-[200px]">
+          <span className="text-[8px]">&#10022;</span>
+        </div>
         <button
           onClick={onRequestReading}
           disabled={isAnalyzing}
-          className="px-10 py-3 border-2 border-gold-500 text-gold-400 font-serif text-sm uppercase tracking-widest hover:bg-gold-500 hover:text-mystic-950 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-12 py-3.5 border-2 border-gold-500 text-gold-400 font-serif text-sm uppercase tracking-[0.3em] hover:bg-gold-500 hover:text-mystic-950 transition-all disabled:opacity-40 disabled:cursor-not-allowed mystic-pulse"
         >
-          {isAnalyzing ? '解读生成中...' : 'AI 深度解读'}
+          {isAnalyzing ? '✦ 解读生成中...' : '✦ AI 深度解读'}
         </button>
       </div>
     </div>
