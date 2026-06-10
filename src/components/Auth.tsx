@@ -7,12 +7,37 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ onClose }: AuthModalProps) {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState('');
 
-  const handleGoogleLogin = async () => {
+  const handleEmailLogin = async () => {
+    const trimmed = email.trim();
+    if (!trimmed) {
+      setError('请输入邮箱地址');
+      return;
+    }
+    setIsLoading(true);
+    setError('');
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: trimmed,
+        options: { emailRedirectTo: `${window.location.origin}/` },
+      });
+      if (error) throw error;
+      setEmailSent(true);
+    } catch (err: any) {
+      setError(err.message || '发送失败');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGithubLogin = async () => {
     setError('');
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+      provider: 'github',
       options: { redirectTo: `${window.location.origin}/` },
     });
     if (error) setError(error.message);
@@ -36,11 +61,37 @@ export function AuthModal({ onClose }: AuthModalProps) {
             <div className="p-2.5 border border-red-400/20 bg-red-400/5 text-red-400/70 text-xs text-center rounded-sm">{error}</div>
           )}
 
+          {/* Email OTP */}
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="输入邮箱"
+                className="flex-1 text-xs font-mono bg-mystic-800/50 border border-gold-500/15 px-3 py-2.5 text-gold-200 focus:border-gold-500/50 focus:outline-none transition-all rounded-sm"
+                disabled={isLoading}
+                onKeyDown={e => e.key === 'Enter' && handleEmailLogin()}
+              />
+              <button
+                onClick={handleEmailLogin}
+                disabled={isLoading}
+                className="px-3 py-2.5 text-xs font-mono border border-gold-500/25 text-gold-500/70 hover:border-gold-500/60 hover:text-gold-400 transition-colors disabled:opacity-50 rounded-sm"
+              >
+                {isLoading ? '...' : '发送'}
+              </button>
+            </div>
+            {emailSent && (
+              <p className="text-[10px] text-gold-500/50 font-mono">✦ 验证邮件已发送，请查收邮箱点击链接登录</p>
+            )}
+          </div>
+
+          {/* GitHub login */}
           <button
-            onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-gold-500/25 text-gold-400 text-sm font-serif hover:border-gold-500/50 hover:bg-gold-500/10 transition-all rounded-sm mystic-pulse"
+            onClick={handleGithubLogin}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gold-500/15 text-gold-500/50 text-sm font-serif hover:border-gold-500/40 hover:text-gold-400 hover:bg-mystic-800/30 transition-all rounded-sm"
           >
-            Google 一键登录
+            GitHub 登录
           </button>
 
           <p className="text-[10px] text-gold-500/25 text-center">每日 10 次免费解读</p>
